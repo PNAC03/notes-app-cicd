@@ -34,6 +34,7 @@ stages:
   jobs:
   - job: Deploy
     displayName: Deploy
+    continueOnError: true
     steps:
     - task: SSH@0
       inputs:
