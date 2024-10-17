@@ -27,7 +27,7 @@ stages:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'git clone https://$(PAT)@dev.azure.com/aditya12010739/azurecicd_test/_git/notes_app; docker build -t adityacharan/notes-app:latest . ; docker login -u AdityaCharan -p $(dockerpass); docker push adityacharan/notes-app;'
+          script: 'git clone https://$(PAT)@dev.azure.com/aditya12010739/azurecicd_test/_git/notes_app; docker build -t adityacharan/notes-app:latest . ; docker login -u adityacharan -p $(dockerpass); docker push adityacharan/notes-app;'
 
 - stage: Deploy
   displayName: Deploy stage
