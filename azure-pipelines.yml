@@ -40,5 +40,4 @@ stages:
         sshEndpoint: 'SSH_Con'
         runOptions: 'inline'
         inline: 'docker login -u adityacharan -p $(dockerpass) && docker pull adityacharan/notes-app && docker run -dit 3000:3000 adityacharan/notes-app'
-        interpreterCommand: "/bin/bash"
         readyTimeout: '20000'
