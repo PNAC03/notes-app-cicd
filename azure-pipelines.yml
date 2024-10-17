@@ -1,0 +1,43 @@
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  imageRepository: 'adityacharan/notes-app'
+  containerRegistry: 'docker.io'
+  dockerfilePath: '**/vote/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+pool:
+  name: 'azureagent'
+
+stages:
+- stage: Build & Push
+  displayName: Build & Push stage
+  jobs:
+  - job: BuildnPush
+    displayName: Build
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: 'git clone https://$(PAT)@dev.azure.com/aditya12010739/azurecicd_test/_git/notes_app && docker build -t adityacharan/notes-app:latest && docker push adityacharan/notes-app'
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'SSH_Con'
+        runOptions: 'inline'
+        inline: 'docker login -u AdityaCharan -p $(dockerpass) && docker pull adityacharan/notes-app && docker run -dit 3000:3000 adityacharan/notes-app'
+        readyTimeout: '20000'
