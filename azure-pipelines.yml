@@ -2,7 +2,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-  main
+- main
 
 resources:
 - repo: self
@@ -15,10 +15,10 @@ variables:
   tag: '$(Build.BuildId)'
 
 pool:
-  name: 'azureagent'
+  name: 'mypooll'
 
 stages:
-- stage: Build & Push
+- stage: BuildnPush
   displayName: Build & Push stage
   jobs:
   - job: BuildnPush
