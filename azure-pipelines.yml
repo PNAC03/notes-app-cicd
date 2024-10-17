@@ -37,7 +37,7 @@ stages:
     steps:
     - task: SSH@0
       inputs:
-        sshEndpoint: 'SSH_Con'
+        sshEndpoint: 'SSH_VPS'
         runOptions: 'inline'
-        inline: 'docker login -u adityacharan -p $(dockerpass) && docker pull adityacharan/notes-app && docker run -dit 3000:3000 adityacharan/notes-app'
+        inline: 'docker login -u adityacharan -p $(dockerpass) ; docker pull adityacharan/notes-app ; docker run -dit 3000:3000 adityacharan/notes-app'
         readyTimeout: '20000'
