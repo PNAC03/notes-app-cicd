@@ -24,7 +24,7 @@ stages:
   - job: BuildnPush
     displayName: Build
     steps:
-      - task: Bash@3
+      - task: PowerShell@2
         inputs:
           targetType: 'inline'
           script: 'git clone https://$(PAT)@dev.azure.com/aditya12010739/azurecicd_test/_git/notes_app && docker build -t adityacharan/notes-app:latest && docker push adityacharan/notes-app'
